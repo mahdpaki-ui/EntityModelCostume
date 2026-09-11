@@ -1,0 +1,162 @@
+getgenv().OgHungerNewSpawner = nil 
+
+local success, Spawner = pcall(function()
+	return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+end)
+
+if not success or not Spawner then
+	return
+end
+
+local entity = Spawner:Create({
+	Entity = {
+		Name = "A-60",
+		Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/A60L_0FanMade.rbxm",
+		HeightOffset = -1
+	},
+	Lights = {
+		Flicker = { 
+			Enabled = true,
+			Duration = 3
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = false
+	},
+	Spawned = {
+		ChangeColorWhenSpawn = true, 
+		Rainbow = false,              
+		Color = Color3.fromRGB(255, 0, 0)
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {300, 300, 0.1, 1}
+	},
+
+	Movement = {
+		Speed = 1000,
+		SpeedFast = 1000,                  
+		MoveFastNotEnter = false,            
+		Delay = 30,
+		Reversed = false,                  
+		EndWhenEnterLatestRoom = false,   
+		EndDelay = 0,
+
+		ReboundMoving = false,          
+		TweenSecond = 1.5,            
+
+		ReboundMoveStyle = false,      
+		ReboundStyleTimes = 3,        
+		ReboundStyleSound = "rbxassetid://17282558991", 
+		ReboundStyleVolume = 5,
+		ReboundStyleDelay = 0, 
+
+		ChasePlayerWhenSee = false,
+		SpeedWhenChase = 35
+	},
+
+	Jumpscare = {
+		Enabled = false,
+		Image1 = "rbxassetid://11253398403", 
+		Image2 = "rbxassetid://12293509957",
+		Sound1 = "rbxassetid://0", 
+		Sound2 = "rbxassetid://109582246349306", 
+		Tease = {
+			[1] = true,
+			Min = 1,
+			Max = 1
+		},
+		Flashing = {
+			[1] = true,
+			[2] = Color3.fromRGB(255, 255, 255)
+		},
+		Shake = true
+	},
+	Rebounding = {
+		Enabled = true,
+		Type = "Ambush",
+		Min = 1,
+		Max = 50,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		KillOnMove = false,            
+		Range = 40,
+		Amount = 125,
+		IgnoreHiding = false,
+
+		JumpscareRipper = {
+			Enabled = false,
+			TargetPartName = "RushNew",
+			AttachmentName = "Attachment",
+			ParticleName = "ParticleEmitter",
+			ParticleTexture = "rbxassetid://11914051787",
+			SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+			SlamSoundId = "rbxassetid://0",
+			EndSoundId = "rbxassetid://0",
+			Images = {
+				"rbxassetid://8482795900",
+				"rbxassetid://236542974",
+				"rbxassetid://184251462",
+				"rbxassetid://236777652"
+			},
+			FlashDuration = 1.6
+		}
+	},
+	Crucifixion = {  
+		Enabled = true,
+		Range = 40,
+		Resist = true,
+		Break = false
+	},
+	Death = {
+		Type = "Guiding",
+		Hints = {"Oh is you.", "It seem you were died to...", "uhmm..", "A-60?..", "I....Never seen that entity before..", "Is like a entity that come from the rooms in the subfloor that got replace.", "But is faces a completly change for some reason.", "Tried to hide as possible has you can.", "Bye"},
+		Cause = "A-60"
+	}
+})
+
+entity:SetCallback("OnSpawned", function()
+end)
+
+entity:SetCallback("OnStartMoving", function()
+
+end)
+
+entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+end)
+
+entity:SetCallback("PlayerGetSee", function()
+
+end)
+
+entity:SetCallback("EndWhenGO", function()
+end)
+
+entity:SetCallback("OnDespawning", function()
+
+end)
+
+entity:SetCallback("OnDespawned", function()
+
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+end)
+
+---====== Run Entity ======---
+
+entity:Run(true)
