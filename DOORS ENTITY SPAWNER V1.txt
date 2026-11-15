@@ -1,0 +1,4173 @@
+---Jk the script entity spawner doors by me---
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+	Name = "Entity Spawner Script",
+	Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+	LoadingTitle = "Entity Spawner Script",
+	LoadingSubtitle = "script by Kikahil22",
+	ShowText = "Rayfield", -- for mobile users to unhide Rayfield, change if you'd like
+	Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+	ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+	DisableRayfieldPrompts = false,
+	DisableBuildWarnings = false, -- Prevents Rayfield from emitting warnings when the script has a version mismatch with the interface.
+
+	-- ScriptID = "sid_xxxxxxxxxxxx", -- Your Script ID from developer.sirius.menu — enables analytics, managed keys, and script hosting
+
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "Big Hub"
+	},
+
+	Discord = {
+		Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+		Invite = "noinvitelink", -- The Discord invite code, do not include Discord.gg/. E.g. Discord.gg/ABCD would be ABCD
+		RememberJoins = true -- Set this to false to make them join the Discord every time they load it up
+	},
+
+	KeySystem = false, -- Set this to true to use our key system
+	KeySettings = {
+		Title = "Untitled",
+		Subtitle = "Key System",
+		Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+		FileName = "Key", -- It is recommended to use something unique, as other scripts using Rayfield may overwrite your key file
+		SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+		Key = {"Hello"} -- List of keys that the system will accept, can be RAW file links (pastebin, github, etc.) or simple strings ("hello", "key22")
+	}
+})
+
+local Tab = Window:CreateTab("Entity Spawn", 6811144002) -- Title, Image
+
+local Button = Tab:CreateButton({
+	Name = "Spawn A-60 L_0",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "A-60",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/A60L_0FanMade.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = true,
+					Duration = 3
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = true, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {300, 300, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 1000,
+				SpeedFast = 1000,                  
+				MoveFastNotEnter = false,            
+				Delay = 30,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush",
+				Min = 1,
+				Max = 50,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = true,
+				Break = false
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"Oh is you.", "It seem you were died to...", "uhmm..", "A-60?..", "I....Never seen that entity before..", "Is like a entity that come from the rooms in the subfloor that got replace.", "But is faces a completly change for some reason.", "Tried to hide as possible has you can.", "Bye"},
+				Cause = "A-60"
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+			print("Entity is despawning")
+			---====== Load achievement giver ======---
+			local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+
+			---====== Display achievement ======---
+			achievementGiver({
+				Title = "Out of many Rebounds",
+				Desc = "Might Come back or not",
+				Reason = "Encounter and survive the rare Entity Called A-60",
+				Image = "rbxassetid://12209846393"
+			})
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Matcher",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Matcher",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/Matcher.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = true,
+					Duration = 3
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = true, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 100,
+				SpeedFast = 100,                  
+				MoveFastNotEnter = false,            
+				Delay = 0,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = false,
+				Type = "Ambush",
+				Min = 1,
+				Max = 20,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"You died to Matcher", "ok ahh.", "Lazy to make a hint |:c"},
+				Cause = "Matcher"
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Silence Hardcore",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Silence",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/Silencehardcore.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = false,
+					Duration = 3
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = true, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 50,
+				SpeedFast = 50,                  
+				MoveFastNotEnter = false,            
+				Delay = 0,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = false,
+				Type = "Ambush",
+				Min = 1,
+				Max = 20,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = true,
+				Break = false
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"You died to Silence", "That entity is slow and quiet a little bit and the light doesnt flicker.", "Try to hide a spot when you heard a sound", "Bye."},
+				Cause = "Silence"
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+			print("Entity is despawning")
+			---====== Load achievement giver ======---
+			local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+
+			---====== Display achievement ======---
+			achievementGiver({
+				Title = "Be Quiet...",
+				Desc = "Where did that thing come from?.",
+				Reason = "Survive the Silence.",
+				Image = "rbxassetid://14168722837"
+			})
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Ripper",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/ItzzGabbbb/RipperSpawner/refs/heads/main/RipperEntityFromHardcoreMode.lua"))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Sign Entity",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastefy.app/9dkXpSyy/raw"))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Deer God",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/Deer%20god"))() 
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Troll",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Troll",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/TrollFixed.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = false,
+					Duration = 3
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = true, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 500,
+				SpeedFast = 500,                  
+				MoveFastNotEnter = false,            
+				Delay = 3,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush",
+				Min = 1,
+				Max = 20,
+				Delay = 3
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"Uhh..", "Alr."},
+				Cause = "Troll"
+
+
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn LSPLASH",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "LSPLASH",
+				Asset = "rbxassetid://73670649770665",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = false,
+					Duration = 3
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = true, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 200,
+				SpeedFast = 200,                  
+				MoveFastNotEnter = false,            
+				Delay = 2,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush",
+				Min = 1,
+				Max = 5,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"You died to Lsplash", "lmaoo"},
+				Cause = "LSPLASH"
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Old Ambush",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "OldAmbush",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/OldAmbush.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = false,
+					Duration = 3
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = true, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 300,
+				SpeedFast = 300,                  
+				MoveFastNotEnter = false,            
+				Delay = 2,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush",
+				Min = 1,
+				Max = 5,
+				Delay = 3
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"You died to Matcher", "ok ahh.", "Lazy to make a hint |:c"},
+				Cause = "OldAmbush"
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Seek Sludge",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastefy.app/WriAWziu/raw"))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn God",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastefy.app/lAn7TCVE/raw"))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Matcher",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Matcher",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/Matcher.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = true,
+					Duration = 3
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = true, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 100,
+				SpeedFast = 100,                  
+				MoveFastNotEnter = false,            
+				Delay = 0,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = false,
+				Type = "Ambush",
+				Min = 1,
+				Max = 20,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"You died to Matcher", "ok ahh.", "Lazy to make a hint |:c"},
+				Cause = "Matcher"
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn WH1T3",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Impossible/refs/heads/main/Wh1t3"))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Rebound",
+	Callback = function()
+		function light(tim,color0,color1)
+			local tweenservice = game:GetService("TweenService")
+			local info = TweenInfo.new(tim,Enum.EasingStyle.Linear)
+			for _ , light in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
+				if light:IsA("Light") or light:IsA("SurfaceLight") or light:IsA("SpotLight") then
+					local target = {Color = color1}
+					local anim = tweenservice:Create(light,info,target)
+					anim:Play()
+				end
+				if light:IsA("MeshPart") and light.Material == Enum.Material.Neon  and light.Name ~= "Skybox" then
+					local target1 = {Color = color0}
+					local anim2 = tweenservice:Create(light,info,target1)
+					anim2:Play()
+				end
+			end
+		end
+
+		---====== Load spawner ======---
+
+		local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/DOORS-Entity-Spawner-V2/main/init.luau"))()
+
+		---====== Create entity ======---
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Wh1t3",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/Rebound.rbxm",
+				HeightOffset = 0
+			},
+			Lights = {
+				Flicker = {
+					Enabled = false,
+					Duration = 1
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+			},
+			Movement = {
+				Speed = 50,
+				Delay = 0,
+				Reversed = false
+			},
+			Rebounding = {
+				Enabled = false,
+				Type = "Ambush", -- "Blitz"
+				Min = 1,
+				Max = 2,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				Range = 40,
+				Amount = 125
+			},
+			Crucifixion = {
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding", -- "Curious"
+				Hints = {"Death", "Hints", "Go", "Here"},
+				Cause = ""
+			}
+		})
+
+		---====== Debug entity ======---
+
+		entity:SetCallback("OnSpawned", function()
+			print("Entity has spawned")
+
+			game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(0, 234, 255)
+			game.Lighting.MainColorCorrection.Contrast = 1
+			local tween = game:GetService("TweenService")
+			tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(2.5), {Contrast = 0}):Play()
+			local TweenService = game:GetService("TweenService")
+			local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(50),{TintColor = Color3.fromRGB(255, 255, 255)})
+			TW:Play()
+
+			local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+			local camara = game.Workspace.CurrentCamera
+			local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(shakeCf)
+				camara.CFrame = camara.CFrame * shakeCf
+			end)
+			camShake:Start()
+			camShake:ShakeOnce(20,10,0,4,0.2,0.2)
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+			if lineOfSight == true then
+				print("I SEE U")
+				local FPS = 5
+				local clock = tick()
+				while clock + 1 / FPS > tick() do end
+				wait()
+				clock = tick()
+			else
+				print("Player view is obstructed by something")
+			end
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+			if newHealth <= 0 then
+				print("Entity has killed the player")
+				local function playSoundSafe(soundObj, timePos, speed, volume)
+					if not soundObj or not soundObj.Parent then
+						return
+					end
+
+					soundObj:Stop()
+					soundObj.TimePosition = timePos or 0
+					soundObj.PlaybackSpeed = speed or 1
+					soundObj.Volume = volume or 1
+					soundObj:Play()
+				end
+
+				local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+				local screenGui = Instance.new("ScreenGui")
+				screenGui.Name = "FlashOverlay"
+				screenGui.IgnoreGuiInset = true 
+				screenGui.Parent = playerGui
+
+				local frame = Instance.new("Frame")
+				frame.Size = UDim2.new(1, 0, 1, 0)
+				frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				frame.BackgroundTransparency = 0 -- Start invisible
+				frame.BorderSizePixel = 0
+				frame.Parent = screenGui
+
+				local cue2 = Instance.new("Sound")
+				cue2.Parent = game.Workspace
+				cue2.Name = "Spawn"
+				cue2.SoundId = "rbxassetid://109790776120081"
+				cue2.Volume = 10
+				cue2.TimePosition = 0
+				cue2.PlaybackSpeed = 1
+				cue2:Play()
+
+
+				local colors = {
+					Color3.fromRGB(0, 0, 0),
+					Color3.fromRGB(0, 242, 255),
+					Color3.fromRGB(0, 251, 255),
+					Color3.fromRGB(0, 85, 68),
+					Color3.fromRGB(0, 170, 150),
+					Color3.fromRGB(0, 120, 116)
+				}
+
+				local rebound = Instance.new("ImageLabel")
+				rebound.Image = "rbxassetid://11862656458"
+				rebound.Size = UDim2.new(0, 600, 0, 600)
+				rebound.Position = UDim2.new(0.5, 0, 0.5, 0)
+				rebound.AnchorPoint = Vector2.new(0.5, 0.5)
+				rebound.Parent = screenGui
+				rebound.BackgroundTransparency = 1
+				rebound.ResampleMode = Enum.ResamplerMode.Pixelated
+				rebound.ImageTransparency = 0
+				rebound.ZIndex = 1000
+
+				local c = task.spawn(function()
+					while true do
+						wait(0.03)				
+						frame.BackgroundColor3 = colors[math.random(1, #colors)]
+						rebound.ImageColor3 = colors[math.random(1, #colors)]
+					end
+				end)
+
+				local TweenService = game:GetService("TweenService")
+				local rng = Random.new() 
+				local tweenInfo = TweenInfo.new(0.04, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+				local a = task.spawn(function()
+					while true do
+						game.TweenService:Create(rebound, tweenInfo, {
+							Position = UDim2.new(rng:NextNumber(0.15, 0.8), 0, rng:NextNumber(0.15, 0.8), 0),
+							Rotation = rng:NextNumber(-60, 30),
+
+							Size = UDim2.new(0, rng:NextNumber(500, 300), 0, rng:NextNumber(50, 700))
+						}):Play()
+
+						task.wait(0.05)
+					end
+				end)
+
+				local b = task.spawn(function()
+					while true do
+						playSoundSafe(cue2, 0.25 + math.random() / 10, math.random(85, 115) / 100, 1)
+						task.wait(0.05)
+					end
+				end)
+
+				wait(math.random(3, 4))
+
+
+				local cue25 = Instance.new("Sound")
+				cue25.Parent = game.Workspace
+				cue25.Name = "Spawn"
+				cue25.SoundId = "rbxassetid://109582246349306"
+				cue25.Volume = 10
+				cue25.TimePosition = 0
+				cue25.PlaybackSpeed = 1
+				cue25:Play()
+
+				task.cancel(c)
+				task.cancel(a)
+				task.cancel(b)
+				local oldBackTween = TweenService:Create(rebound, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+					Position = UDim2.new(0.5, 0, 0.5, 0),
+					Size = UDim2.new(0, 1500, 0, 1700),
+					Rotation = 0
+				})
+				oldBackTween:Play()
+
+				wait(0.5)
+				local cac = TweenService:Create(rebound, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+					ImageTransparency = 1
+
+				})
+				cac:Play()
+				frame:Destroy()
+				wait(0.2)
+				cue25:Destroy()
+				wait(0.8)
+				frame:Destroy()
+				cue2:Destroy()
+			else
+				print("Entity has damaged the player")
+			end
+		end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+		---====== Run entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn WH1T3 Origin",
+	Callback = function()
+		function light(tim,color0,color1)
+			local tweenservice = game:GetService("TweenService")
+			local info = TweenInfo.new(tim,Enum.EasingStyle.Linear)
+			for _ , light in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
+				if light:IsA("Light") or light:IsA("SurfaceLight") or light:IsA("SpotLight") then
+					local target = {Color = color1}
+					local anim = tweenservice:Create(light,info,target)
+					anim:Play()
+				end
+				if light:IsA("MeshPart") and light.Material == Enum.Material.Neon  and light.Name ~= "Skybox" then
+					local target1 = {Color = color0}
+					local anim2 = tweenservice:Create(light,info,target1)
+					anim2:Play()
+				end
+			end
+		end
+
+		---====== Load spawner ======---
+
+		local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/DOORS-Entity-Spawner-V2/main/init.luau"))()
+
+		---====== Create entity ======---
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Wh1t3",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/Wh1t3.rbxm",
+				HeightOffset = 0
+			},
+			Lights = {
+				Flicker = {
+					Enabled = false,
+					Duration = 1
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+			},
+			Movement = {
+				Speed = 500,
+				Delay = 7.158,
+				Reversed = false
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush", -- "Blitz"
+				Min = 1,
+				Max = 2,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				Range = 40,
+				Amount = 125
+			},
+			Crucifixion = {
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding", -- "Curious"
+				Hints = {"Death", "Hints", "Go", "Here"},
+				Cause = "WH1T3"
+			}
+		})
+
+		---====== Debug entity ======---
+
+		entity:SetCallback("OnSpawned", function()
+			print("Entity has spawned")
+			local entity = workspace.WH1T3.WH1T3_MODEL
+			entity.Position = Vector3.new(0, 0, 0) -- Đổi thuộc tính thành Position để dùng chung với Vector3
+
+			game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(255, 0, 0)
+			game.Lighting.MainColorCorrection.Contrast = 1
+			local tween = game:GetService("TweenService")
+			tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(2.5), {Contrast = 0}):Play()
+			local TweenService = game:GetService("TweenService")
+			local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(50),{TintColor = Color3.fromRGB(255, 255, 255)})
+			TW:Play()
+
+			light(2,Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0))
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+			if lineOfSight == true then
+				print("I SEE U")
+				local FPS = 5
+				local clock = tick()
+				while clock + 1 / FPS > tick() do end
+				wait()
+				clock = tick()
+			else
+				print("Player view is obstructed by something")
+			end
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+			print("Entity is despawning")
+			---====== Load achievement giver ======---
+			local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+
+			---====== Display achievement ======---
+			achievementGiver({
+				Title = "Fought A Beast And Survived.",
+				Desc = "How?",
+				Reason = "Survive WH1T3.",
+				Image = "rbxassetid://124352542063507"
+			})
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+			if newHealth <= 0 then
+				print("Entity has killed the player")
+				local function playSoundSafe(soundObj, timePos, speed, volume)
+					if not soundObj or not soundObj.Parent then
+						return
+					end
+
+					soundObj:Stop()
+					soundObj.TimePosition = timePos or 0
+					soundObj.PlaybackSpeed = speed or 1
+					soundObj.Volume = volume or 1
+					soundObj:Play()
+				end
+
+				local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+				local screenGui = Instance.new("ScreenGui")
+				screenGui.Name = "FlashOverlay"
+				screenGui.IgnoreGuiInset = true 
+				screenGui.Parent = playerGui
+
+				local frame = Instance.new("Frame")
+				frame.Size = UDim2.new(1, 0, 1, 0)
+				frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				frame.BackgroundTransparency = 0 -- Start invisible
+				frame.BorderSizePixel = 0
+				frame.Parent = screenGui
+
+				local cue2 = Instance.new("Sound")
+				cue2.Parent = game.Workspace
+				cue2.Name = "Spawn"
+				cue2.SoundId = "rbxassetid://109790776120081"
+				cue2.Volume = 10
+				cue2.TimePosition = 0
+				cue2.PlaybackSpeed = 1
+				cue2:Play()
+
+
+				local colors = {
+					Color3.fromRGB(0, 0, 0),
+					Color3.fromRGB(255, 0, 0),
+					Color3.fromRGB(255, 0, 0),
+					Color3.fromRGB(85, 0, 0),
+					Color3.fromRGB(170, 0, 0),
+					Color3.fromRGB(120, 120, 120)
+				}
+
+				local rebound = Instance.new("ImageLabel")
+				rebound.Image = "rbxassetid://109188770255707"
+				rebound.Size = UDim2.new(0, 600, 0, 600)
+				rebound.Position = UDim2.new(0.5, 0, 0.5, 0)
+				rebound.AnchorPoint = Vector2.new(0.5, 0.5)
+				rebound.Parent = screenGui
+				rebound.BackgroundTransparency = 1
+				rebound.ResampleMode = Enum.ResamplerMode.Pixelated
+				rebound.ImageTransparency = 0
+				rebound.ZIndex = 1000
+
+				local c = task.spawn(function()
+					while true do
+						wait(0.03)				
+						frame.BackgroundColor3 = colors[math.random(1, #colors)]
+						rebound.ImageColor3 = colors[math.random(1, #colors)]
+					end
+				end)
+
+				local TweenService = game:GetService("TweenService")
+				local rng = Random.new() 
+				local tweenInfo = TweenInfo.new(0.04, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+				local a = task.spawn(function()
+					while true do
+						game.TweenService:Create(rebound, tweenInfo, {
+							Position = UDim2.new(rng:NextNumber(0.15, 0.8), 0, rng:NextNumber(0.15, 0.8), 0),
+							Rotation = rng:NextNumber(-60, 30),
+
+							Size = UDim2.new(0, rng:NextNumber(500, 300), 0, rng:NextNumber(50, 700))
+						}):Play()
+
+						task.wait(0.05)
+					end
+				end)
+
+				local b = task.spawn(function()
+					while true do
+						playSoundSafe(cue2, 0.25 + math.random() / 10, math.random(85, 115) / 100, 1)
+						task.wait(0.05)
+					end
+				end)
+
+				wait(math.random(3, 4))
+
+
+				local cue25 = Instance.new("Sound")
+				cue25.Parent = game.Workspace
+				cue25.Name = "Spawn"
+				cue25.SoundId = "rbxassetid://5263560896"
+				cue25.Volume = 10
+				cue25.TimePosition = 0
+				cue25.PlaybackSpeed = 1
+				cue25:Play()
+
+				task.cancel(c)
+				task.cancel(a)
+				task.cancel(b)
+				local oldBackTween = TweenService:Create(rebound, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+					Position = UDim2.new(0.5, 0, 0.5, 0),
+					Size = UDim2.new(0, 1500, 0, 1700),
+					Rotation = 0
+				})
+				oldBackTween:Play()
+
+				wait(0.5)
+				local cac = TweenService:Create(rebound, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+					ImageTransparency = 1
+
+				})
+				cac:Play()
+				frame:Destroy()
+				wait(0.2)
+				cue25:Destroy()
+				wait(0.8)
+				frame:Destroy()
+				cue2:Destroy()
+			else
+				print("Entity has damaged the player")
+			end
+		end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+		---====== Run entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Cooper",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Cooper",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/Cooper.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = true,
+					Duration = 1
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = false, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 500,
+				SpeedFast = 500,                  
+				MoveFastNotEnter = false,            
+				Delay = 0,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush",
+				Min = 1,
+				Max = 20,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"Uhh..", "Alr."},
+				Cause = "Cooper"
+
+
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn A-90",
+	Callback = function()
+		wait(2)
+		function DeathHint(args, Color) -- credits to Master Oogway in the kardin hong discord server
+			local func, setupval, getinfo, typeof, getgc, next = nil, debug.setupvalue or setupvalue, debug.getinfo or getinfo, typeof, getgc, next
+
+			for i,v in next, getgc(false) do
+				if typeof(v) == "function" then
+					local info = getinfo(v)
+					if info.currentline == 54 and info.nups == 2 and info.is_vararg == 0 then
+						func = v
+						break
+					end
+				end
+			end
+
+			local function Hint(hints, type: string)
+				setupval(func, 1, hints)
+				if type ~= nil then
+					setupval(func, 2, type)
+				end
+			end
+
+			Hint({
+				unpack(args)
+			}, Color)
+		end
+		spawn(function()
+			require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.A90)(require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game))
+		end)
+		spawn(function()
+			wait(2) -- dont know any other way
+			Survived = true
+		end)
+		repeat task.wait() until game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_A90.FaceAngry.Visible == true or Survived
+		if Survived then return end
+		local ReSt = game:GetService("ReplicatedStorage") 
+		ReSt.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "A-90"
+		pcall(function()
+			DeathHint({
+				"Oh... Hello.",
+				"I'm surprised you found this place...",
+				"It's pretty tedious just to get here, last time I checked",
+				"Anyways, what'd you die to?",
+				"Oh that one...",
+				"I hope that one isn't too confusing...",
+				"All I'll let you know is that it starts attacking after room A-90.",
+				"So, you could call it A-90.",
+				"Anyways, I hope you don't mind trying again. It would be helpful.",
+			}, "Yellow")
+		end)
+		wait(1)
+		game.Players.LocalPlayer.Character.Humanoid:TakeDamage(90)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn A-10",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "A-10",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/a10.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = false,
+					Duration = 1
+				},
+				Shatter = false,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = false, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = false,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 100,
+				SpeedFast = 100,                  
+				MoveFastNotEnter = false,            
+				Delay = 3,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = false,
+				Type = "Ambush",
+				Min = 1,
+				Max = 20,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = false,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Curious",
+				Hints = {"Uhh..", "Alr."},
+				Cause = "A-120"
+
+
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn A-200",
+	Callback = function()
+		getgenv().OgHungerNewSpawner = nil 
+
+		local success, Spawner = pcall(function()
+			return loadstring(game:HttpGet("https://raw.githubusercontent.com/eoyoustme/Mayhem-Remake/refs/heads/main/OgHungerNewSpawner"))()
+		end)
+
+		if not success or not Spawner then
+			return
+		end
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "A-200",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/a200.rbxm",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = { 
+					Enabled = false,
+					Duration = 1
+				},
+				Shatter = false,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			Spawned = {
+				ChangeColorWhenSpawn = false, 
+				Rainbow = false,              
+				Color = Color3.fromRGB(255, 0, 0)
+			},
+			CameraShake = {
+				Enabled = false,
+				Range = 100,
+				Values = {10, 20, 0.1, 1}
+			},
+
+			Movement = {
+				Speed = 100,
+				SpeedFast = 100,                  
+				MoveFastNotEnter = false,            
+				Delay = 3,
+				Reversed = false,                  
+				EndWhenEnterLatestRoom = false,   
+				EndDelay = 0,
+
+				ReboundMoving = false,          
+				TweenSecond = 1.5,            
+
+				ReboundMoveStyle = false,      
+				ReboundStyleTimes = 3,        
+				ReboundStyleSound = "rbxassetid://17282558991", 
+				ReboundStyleVolume = 5,
+				ReboundStyleDelay = 0, 
+
+				ChasePlayerWhenSee = false,
+				SpeedWhenChase = 35
+			},
+
+
+			Jumpscare = {
+				Enabled = false,
+				Image1 = "rbxassetid://11253398403", 
+				Image2 = "rbxassetid://12293509957",
+				Sound1 = "rbxassetid://0", 
+				Sound2 = "rbxassetid://109582246349306", 
+				Tease = {
+					[1] = true,
+					Min = 1,
+					Max = 1
+				},
+				Flashing = {
+					[1] = true,
+					[2] = Color3.fromRGB(255, 255, 255)
+				},
+				Shake = true
+			},
+			Rebounding = {
+				Enabled = false,
+				Type = "Ambush",
+				Min = 1,
+				Max = 20,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				KillOnMove = false,            
+				Range = 40,
+				Amount = 125,
+				IgnoreHiding = false,
+
+				JumpscareRipper = {
+					Enabled = false,
+					TargetPartName = "RushNew",
+					AttachmentName = "Attachment",
+					ParticleName = "ParticleEmitter",
+					ParticleTexture = "rbxassetid://11914051787",
+					SoundUrl = "https://github.com/eoyoustme/back/raw/main/Kill_with_static.mp3",
+					SlamSoundId = "rbxassetid://0",
+					EndSoundId = "rbxassetid://0",
+					Images = {
+						"rbxassetid://8482795900",
+						"rbxassetid://236542974",
+						"rbxassetid://184251462",
+						"rbxassetid://236777652"
+					},
+					FlashDuration = 1.6
+				}
+			},
+			Crucifixion = {  
+				Enabled = false,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Curious",
+				Hints = {"Uhh..", "Alr."},
+				Cause = "A-200"
+
+
+			}
+		})
+
+		entity:SetCallback("OnSpawned", function()
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+
+		end)
+
+		entity:SetCallback("PlayerGetSee", function()
+
+		end)
+
+		entity:SetCallback("EndWhenGO", function()
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+		end)
+
+		---====== Run Entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn DronesStampede [Cannot damaging]",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/kTWTv2ks"))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "The Ransom's Drive",
+	Callback = function()
+		---====== Load spawner ======---
+
+		local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+		---====== Create entity ======---
+
+		local entity = spawner.Create({
+			Entity = {
+				Name = "Depth",
+				Asset = "https://github.com/eoyoustme/ohh/blob/main/Detph.rbxm?raw=true",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = {
+					Enabled = false,
+					Duration = 1
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 30, 0.1, 1.2} -- Magnitude, Roughness, FadeIn, FadeOut
+			},
+			Movement = {
+				Speed = 200,
+				Delay = 5,
+				Reversed = false
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush", -- "Blitz"
+				Min = 5,
+				Max = 5,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				Range = 40,
+				Amount = 125
+			},
+			Crucifixion = {
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding", -- "Curious"
+				Hints = {"You died to Depth...", "It appears at the next door and has a chance to stay there or run back to the oldest door.", "He will come back many times after his initial spawn", "so hide every next door until it is safe.."},
+				Cause = ""
+			}
+		})
+
+		---====== Debug entity ======---
+
+		entity:SetCallback("OnSpawned", function()
+			print("Entity has spawned")
+			local TweenService = game:GetService("TweenService")
+			local Lighting = game.Lighting
+			local cc = Lighting:WaitForChild("MainColorCorrection")
+			local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+			local cam = workspace.CurrentCamera
+
+			-- Tạo CameraShaker
+			local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+				cam.CFrame = cam.CFrame * cf
+			end)
+			camShake:Start()
+
+			-- Âm thanh
+			local cue = Instance.new("Sound")
+			cue.Parent = workspace
+			cue.SoundId = "rbxassetid://926058764"
+			cue.Volume = 10
+			cue.PlaybackSpeed = 0.89
+
+			-- 🔥 Load âm thanh trước
+			cue.Loaded:Wait()
+
+			-- ✅ Đặt TimePosition sau khi load xong
+			cue.TimePosition = 0
+
+			-- Phát cùng lúc lighting
+			cue:Play()
+
+			-- Lighting bắt đầu ngay
+			cc.TintColor = Color3.fromRGB(0, 135, 255)
+			cc.Contrast = 1
+			cc.Saturation = -0.7
+			TweenService:Create(cc, TweenInfo.new(10), {Contrast = 0}):Play()
+			TweenService:Create(cc, TweenInfo.new(10), {Saturation = 0}):Play()
+			wait(1)
+			-- Tween fade trắng 8 giây
+			TweenService:Create(cc, TweenInfo.new(15), {TintColor = Color3.fromRGB(255, 255, 255)}):Play()
+
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+			print("Entity has started moving")
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room, firstTime)
+			if firstTime == true then
+				print("Entity has entered room: ".. room.Name.. " for the first time")
+			else
+				print("Entity has entered room: ".. room.Name.. " again")
+			end
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight)
+			if lineOfSight == true then
+				print("Player is looking at entity")
+			else
+				print("Player view is obstructed by something")
+			end
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound)
+			if startOfRebound == true then
+				print("Entity has started rebounding")
+			else
+				print("Entity has finished rebounding")
+			end
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+			print("Entity is despawning")
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+			print("Entity has despawned")
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth)
+			if newHealth == 0 then
+				print("Entity has killed the player")
+				local RunService = game:GetService("RunService")
+				local TweenService = game:GetService("TweenService")
+				local Players = game:GetService("Players")
+				local player = Players.LocalPlayer
+
+				-- Tạo sound + effect giống bạn
+				local sound = Instance.new("Sound", workspace)
+				sound.SoundId = "rbxassetid://5263560566"
+				sound. TimePosition = 0
+				local level = Instance.new("DistortionSoundEffect", sound)
+				level.Level = 0.97
+
+				wait(0.2)
+
+				-- Tạo GUI
+				local screen = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+
+				local background = Instance.new("Frame", screen)
+				background.AnchorPoint = Vector2.new(0.5, 0.5)
+				background.Size = UDim2.new(10, 0, 10, 0)
+				background.Position = UDim2.new(0.5, 0, 0.5, 0)
+				background.BackgroundColor3 = Color3.fromRGB(0, 157, 255)
+
+				local image = Instance.new("ImageLabel", screen)
+				image.AnchorPoint = Vector2.new(0.5, 0.5)
+				image.Position = UDim2.new(0.5, 0, 0.5, 0)
+				image.BackgroundTransparency = 1
+				image.Size = UDim2.new(0, 5, 0, 5)
+				image.LayoutOrder = 0
+				image.BorderSizePixel = 0
+				image.Image = "http://www.roblox.com/asset/?id=11278229112"
+				image.Rotation = 0
+
+				-- flash màu background như bạn
+				task.spawn(function()
+					while background and background.Parent do
+						background.BackgroundColor3 = Color3.fromRGB(0, 17, 255)
+						task.wait(0.08)
+						if not background or not background.Parent then break end
+						background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+						task.wait(0.08)
+					end
+				end)
+
+				-- play sound
+				sound:Play()
+
+				-- Tween scale ảnh (giữ nguyên thời gian 35s)
+				local tween = TweenService:Create(image, TweenInfo.new(75, Enum.EasingStyle.Linear), {Size = UDim2.new(0, 130000, 0, 130000)})
+				tween:Play()
+
+				-- ====== Phần thêm: oscillation (rotation + position jitter) ======
+				local ROT_AMPLITUDE = 12        -- góc tối đa (deg)
+				local PERIOD = 0.1              -- chu kỳ đầy đủ (giây) => -12 -> +12 -> -12
+				local JITTER_X = 60             -- jitter theo pixels ngang (±)
+				local JITTER_Y = 60              -- jitter theo pixels dọc (±)
+
+				-- bắt đầu time
+				local t0 = tick()
+				local conn
+				conn = RunService.RenderStepped:Connect(function()
+					-- nếu image đã bị xóa thì ngắt connection
+					if not image or not image.Parent then
+						if conn then conn:Disconnect() end
+						return
+					end
+
+					local elapsed = tick() - t0
+					-- sinus để quay mượt: sin(2*pi * elapsed / PERIOD) in [-1,1]
+					local s = math.sin(2 * math.pi * elapsed / PERIOD)
+					image.Rotation = ROT_AMPLITUDE * s
+
+					-- position jitter xung quanh center (UDim2.new(0.5, offsetX, 0.5, offsetY))
+					local offsetX = math.sin(2 * math.pi * elapsed / (PERIOD * 1.3)) * JITTER_X -- tỉ lệ khác 1.3 để không hoàn toàn đồng bộ với rotation
+					local offsetY = math.cos(2 * math.pi * elapsed / (PERIOD * 1.1)) * JITTER_Y
+					image.Position = UDim2.new(0.5, offsetX, 0.5, offsetY)
+				end)
+				-- =================================================================
+
+				-- Nếu bạn vẫn muốn destroy giống code gốc: (hiện bạn xóa sau 1 giây)
+				task.wait(1.5)
+				if sound then sound:Destroy() end
+				if screen then screen:Destroy() end
+				if conn then
+					pcall(function() conn:Disconnect() end)
+				end
+			else
+				print("Entity has damaged the player")
+			end
+		end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+		---====== Run entity ======---
+
+		entity:Run()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Smiler",
+	Callback = function()
+		---====== Load spawner ======---
+		local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+		---====== Create entity ======---
+		local entity = spawner.Create({
+			Entity = {
+				Name = "Smiler",
+				Asset = "rbxassetid://108450814500304",
+				HeightOffset = 1
+			},
+			Lights = {
+				Flicker = { Enabled = true, Duration = 10 },
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = { Enabled = false },
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {9, 20, 0.1, 1}
+			},
+			Movement = {
+				Speed = 500,
+				Delay = 12,
+				Reversed = false
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush",
+				Min = 10,
+				Max = 10,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = false,
+				Range = 150,
+				Amount = 125
+			},
+			Crucifixion = {
+				Enabled = true,
+				Range = 160,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding",
+				Hints = {"Death", "Hints", "Go", "Here"},
+				Cause = ""
+			}
+		})
+
+		---====== Debug entity ======---
+		entity:SetCallback("OnSpawned", function()
+			print("Entity has spawned")
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+			print("Entity has started moving")
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound)
+			if startOfRebound then
+				warn("Smiler Smile")
+			else
+				-- Smiler rời rebound → đổi màu
+				game.Lighting.Ambient = Color3.fromRGB(255,0,0)
+				game:GetService("TweenService"):Create(
+					game.Lighting,
+					TweenInfo.new(1.5),
+					{Ambient = Color3.fromRGB(67, 51, 56)}
+				):Play()
+			end
+		end)
+
+		---====== Damage Player + JUMPSCARE ======---
+		entity:SetCallback("OnDamagePlayer", function(newHealth)
+
+			if newHealth == 0 then
+				print("Entity has killed the player")
+				-----------------------------------------------------
+				--                JUMPSCARE GUI
+				-----------------------------------------------------
+
+				local TweenService = game:GetService("TweenService")
+				local player = game.Players.LocalPlayer
+
+				local JumpscareGui = Instance.new("ScreenGui")
+				JumpscareGui.IgnoreGuiInset = true
+				JumpscareGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				JumpscareGui.Parent = player:WaitForChild("PlayerGui")
+
+				local Background = Instance.new("Frame")
+				Background.BackgroundColor3 = Color3.fromRGB(3, 25, 99)
+				Background.Size = UDim2.new(1, 0, 1, 0)
+				Background.ZIndex = 999
+				Background.Parent = JumpscareGui
+
+				local Overlay = Instance.new("ImageLabel")
+				Overlay.BackgroundTransparency = 1
+				Overlay.Size = UDim2.new(1, 0, 1, 0)
+				Overlay.Image = "rbxassetid://236542974"
+				Overlay.ZIndex = 998
+				Overlay.Parent = Background
+
+				local Face = Instance.new("ImageLabel")
+				Face.AnchorPoint = Vector2.new(0.5, 0.5)
+				Face.BackgroundTransparency = 1
+				Face.Position = UDim2.new(0.5, 0, 0.5, 0)
+				Face.ResampleMode = Enum.ResamplerMode.Pixelated
+				Face.Size = UDim2.new(0, 150, 0, 150)
+				Face.Image = "rbxassetid://82464575677230"
+				Face.ZIndex = 1000
+				Face.Parent = Background
+
+				-- SOUND
+				local scare = Instance.new("Sound")
+				scare.SoundId = "rbxassetid://10483837590"
+				scare.Volume = 10
+				scare.Parent = JumpscareGui
+
+				-- FLASH COLOR LOOP
+				task.spawn(function()
+					while JumpscareGui.Parent do
+						Background.BackgroundColor3 = Color3.new(0,0,0)
+						task.wait(math.random(25,100)/1000)
+						Background.BackgroundColor3 = Color3.new(1,0,0)
+						task.wait(math.random(25,100)/1000)
+					end
+				end)
+
+				-- OVERLAY LOOP
+				local overlayImages = {
+					"rbxassetid://0",
+					"rbxassetid://0",
+				}
+				task.spawn(function()
+					local i = 1
+					while JumpscareGui.Parent do
+						Overlay.Image = overlayImages[i]
+						i = (i % #overlayImages) + 1
+						task.wait(0.5)
+					end
+				end)
+
+				--------------------------
+				--     SHAKE + ZOOM
+				--------------------------
+
+				local keepRotating = true
+				task.spawn(function()
+					while keepRotating do
+						Face.Rotation = math.random(-25,25)
+						task.wait(0.01)
+					end
+				end)
+
+				local function tweenTo(obj,props,time)
+					local tween = TweenService:Create(obj, TweenInfo.new(time), props)
+					tween:Play()
+					return tween
+				end
+
+				local function randomPos()
+					return UDim2.new(
+						0.5 + math.random(-40,45)/100,
+						0,
+						0.5 + math.random(-60,55)/100,
+						0
+					)
+				end
+
+				-- ZOOM IN
+				task.spawn(function()
+
+					local duration = 5
+					local enlarge = tweenTo(Face,{
+						Size = UDim2.new(2.5,0,2.5,0)
+					}, duration)
+
+					local start = tick()
+					while tick() - start < duration do
+						Face.Position = randomPos()
+						task.wait()
+					end
+
+					enlarge.Completed:Wait()
+					keepRotating = false
+				end)
+
+				-- PLAY SOUND
+				scare:Play()
+
+				-- DELETE GUI + KILL
+				task.delay(2, function()
+
+					-- GIẾT PLAYER ĐÚNG CÁCH
+					local hum = player.Character and player.Character:FindFirstChild("Humanoid")
+					if hum then
+						hum.Health = 0
+					end
+
+					if JumpscareGui then
+						JumpscareGui:Destroy()
+					end
+				end)
+				return
+			end
+
+			print("Entity has damaged the player")
+
+		end)
+
+		---====== START ENTITY ======---
+		entity:Run()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Depth",
+	Callback = function()
+		---====== Load spawner ======---
+
+		local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+		---====== Create entity ======---
+
+		local entity = spawner.Create({
+			Entity = {
+				Name = "Depth",
+				Asset = "https://github.com/eoyoustme/ohh/blob/main/Detph.rbxm?raw=true",
+				HeightOffset = -1
+			},
+			Lights = {
+				Flicker = {
+					Enabled = false,
+					Duration = 1
+				},
+				Shatter = true,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {10, 30, 0.1, 1.2} -- Magnitude, Roughness, FadeIn, FadeOut
+			},
+			Movement = {
+				Speed = 200,
+				Delay = 5,
+				Reversed = false
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush", -- "Blitz"
+				Min = 5,
+				Max = 5,
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				Range = 40,
+				Amount = 125
+			},
+			Crucifixion = {
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding", -- "Curious"
+				Hints = {"You died to Depth...", "It appears at the next door and has a chance to stay there or run back to the oldest door.", "He will come back many times after his initial spawn", "so hide every next door until it is safe.."},
+				Cause = ""
+			}
+		})
+
+		---====== Debug entity ======---
+
+		entity:SetCallback("OnSpawned", function()
+			print("Entity has spawned")
+			local TweenService = game:GetService("TweenService")
+			local Lighting = game.Lighting
+			local cc = Lighting:WaitForChild("MainColorCorrection")
+			local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+			local cam = workspace.CurrentCamera
+
+			-- Tạo CameraShaker
+			local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+				cam.CFrame = cam.CFrame * cf
+			end)
+			camShake:Start()
+
+			-- Âm thanh
+			local cue = Instance.new("Sound")
+			cue.Parent = workspace
+			cue.SoundId = "rbxassetid://926058764"
+			cue.Volume = 10
+			cue.PlaybackSpeed = 0.89
+
+			-- 🔥 Load âm thanh trước
+			cue.Loaded:Wait()
+
+			-- ✅ Đặt TimePosition sau khi load xong
+			cue.TimePosition = 0
+
+			-- Phát cùng lúc lighting
+			cue:Play()
+
+			-- Lighting bắt đầu ngay
+			cc.TintColor = Color3.fromRGB(0, 135, 255)
+			cc.Contrast = 1
+			cc.Saturation = -0.7
+			TweenService:Create(cc, TweenInfo.new(10), {Contrast = 0}):Play()
+			TweenService:Create(cc, TweenInfo.new(10), {Saturation = 0}):Play()
+			wait(1)
+			-- Tween fade trắng 8 giây
+			TweenService:Create(cc, TweenInfo.new(15), {TintColor = Color3.fromRGB(255, 255, 255)}):Play()
+
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+			print("Entity has started moving")
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room, firstTime)
+			if firstTime == true then
+				print("Entity has entered room: ".. room.Name.. " for the first time")
+			else
+				print("Entity has entered room: ".. room.Name.. " again")
+			end
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight)
+			if lineOfSight == true then
+				print("Player is looking at entity")
+			else
+				print("Player view is obstructed by something")
+			end
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound)
+			if startOfRebound == true then
+				print("Entity has started rebounding")
+			else
+				print("Entity has finished rebounding")
+			end
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+			print("Entity is despawning")
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+			print("Entity has despawned")
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth)
+			if newHealth == 0 then
+				print("Entity has killed the player")
+				local RunService = game:GetService("RunService")
+				local TweenService = game:GetService("TweenService")
+				local Players = game:GetService("Players")
+				local player = Players.LocalPlayer
+
+				-- Tạo sound + effect giống bạn
+				local sound = Instance.new("Sound", workspace)
+				sound.SoundId = "rbxassetid://5263560566"
+				sound. TimePosition = 0
+				local level = Instance.new("DistortionSoundEffect", sound)
+				level.Level = 0.97
+
+				wait(0.2)
+
+				-- Tạo GUI
+				local screen = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+
+				local background = Instance.new("Frame", screen)
+				background.AnchorPoint = Vector2.new(0.5, 0.5)
+				background.Size = UDim2.new(10, 0, 10, 0)
+				background.Position = UDim2.new(0.5, 0, 0.5, 0)
+				background.BackgroundColor3 = Color3.fromRGB(0, 157, 255)
+
+				local image = Instance.new("ImageLabel", screen)
+				image.AnchorPoint = Vector2.new(0.5, 0.5)
+				image.Position = UDim2.new(0.5, 0, 0.5, 0)
+				image.BackgroundTransparency = 1
+				image.Size = UDim2.new(0, 5, 0, 5)
+				image.LayoutOrder = 0
+				image.BorderSizePixel = 0
+				image.Image = "http://www.roblox.com/asset/?id=11278229112"
+				image.Rotation = 0
+
+				-- flash màu background như bạn
+				task.spawn(function()
+					while background and background.Parent do
+						background.BackgroundColor3 = Color3.fromRGB(0, 17, 255)
+						task.wait(0.08)
+						if not background or not background.Parent then break end
+						background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+						task.wait(0.08)
+					end
+				end)
+
+				-- play sound
+				sound:Play()
+
+				-- Tween scale ảnh (giữ nguyên thời gian 35s)
+				local tween = TweenService:Create(image, TweenInfo.new(75, Enum.EasingStyle.Linear), {Size = UDim2.new(0, 130000, 0, 130000)})
+				tween:Play()
+
+				-- ====== Phần thêm: oscillation (rotation + position jitter) ======
+				local ROT_AMPLITUDE = 12        -- góc tối đa (deg)
+				local PERIOD = 0.1              -- chu kỳ đầy đủ (giây) => -12 -> +12 -> -12
+				local JITTER_X = 60             -- jitter theo pixels ngang (±)
+				local JITTER_Y = 60              -- jitter theo pixels dọc (±)
+
+				-- bắt đầu time
+				local t0 = tick()
+				local conn
+				conn = RunService.RenderStepped:Connect(function()
+					-- nếu image đã bị xóa thì ngắt connection
+					if not image or not image.Parent then
+						if conn then conn:Disconnect() end
+						return
+					end
+
+					local elapsed = tick() - t0
+					-- sinus để quay mượt: sin(2*pi * elapsed / PERIOD) in [-1,1]
+					local s = math.sin(2 * math.pi * elapsed / PERIOD)
+					image.Rotation = ROT_AMPLITUDE * s
+
+					-- position jitter xung quanh center (UDim2.new(0.5, offsetX, 0.5, offsetY))
+					local offsetX = math.sin(2 * math.pi * elapsed / (PERIOD * 1.3)) * JITTER_X -- tỉ lệ khác 1.3 để không hoàn toàn đồng bộ với rotation
+					local offsetY = math.cos(2 * math.pi * elapsed / (PERIOD * 1.1)) * JITTER_Y
+					image.Position = UDim2.new(0.5, offsetX, 0.5, offsetY)
+				end)
+				-- =================================================================
+
+				-- Nếu bạn vẫn muốn destroy giống code gốc: (hiện bạn xóa sau 1 giây)
+				task.wait(1.5)
+				if sound then sound:Destroy() end
+				if screen then screen:Destroy() end
+				if conn then
+					pcall(function() conn:Disconnect() end)
+				end
+			else
+				print("Entity has damaged the player")
+			end
+		end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+		---====== Run entity ======---
+
+		entity:Run()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Hungered",
+	Callback = function()
+		local SmileColor = Instance.new("ColorCorrectionEffect", game.Lighting)
+		game.Debris:AddItem(SmileColor, 24) 
+		SmileColor.Name = "SmileWarn" 
+		SmileColor.TintColor = Color3.fromRGB(255, 0, 0)
+		SmileColor.Saturation = 1
+		SmileColor.Contrast = 1
+
+		game.TweenService:Create(SmileColor, TweenInfo.new(15), {
+			TintColor = Color3.fromRGB(255, 255, 255),
+			Saturation = 0,
+			Contrast = 0
+		}):Play()
+
+		local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+		local entity = spawner.Create({
+			Entity = {
+				Name = "Hungered",
+				Asset = "rbxassetid://15104414692",
+				HeightOffset = 0
+			},
+			Lights = {
+				Flicker = {
+					Enabled = false,
+					Duration = 1
+				},
+				Shatter = false,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			CameraShake = {
+				Enabled = false,
+				Range = 100,
+				Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+			},
+			Movement = {
+				Speed = 200,
+				Delay = 8,
+				Reversed = false
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush", -- "Blitz"
+				Min = 1,
+				Max = math.random(2, 4),
+				Delay = 0
+			},
+			Damage = {
+				Enabled = true,
+				Range = 100,
+				Amount = 0.0001
+			},
+			Crucifixion = {
+				Enabled = true,
+				Range = 40,
+				Resist = false,
+				Break = true
+			},
+			Death = {
+				Type = "Guiding", -- "Curious"
+				Hints = {"Death", "Hints", "Go", "Here"},
+				Cause = ""
+			}
+		})
+
+		---====== Debug entity ======---
+
+		entity:SetCallback("OnSpawned", function()
+
+			local entity = game.Workspace.Hungered:FindFirstChildWhichIsA("BasePart")
+
+			task.spawn(function()
+				while true do wait(0)
+					entity.Attachment.ParticleEmitter.Texture = "rbxassetid://91572395211151"
+					wait(0)
+					entity.Attachment.ParticleEmitter.Texture = "rbxassetid://87581800195800"
+					wait(0)
+					entity.Attachment.ParticleEmitter.Brightness = 10
+				end
+			end)
+
+			local cue = Instance.new("Sound")
+			cue.Parent = game.Workspace.Hungered
+			cue.Name = "Spawn"
+			cue.SoundId = "rbxassetid://9125713308"
+			cue.Volume = 3
+			cue.PlaybackSpeed = 1
+			cue:Play()
+			wait(1)
+			local cue2 = Instance.new("Sound")
+			cue2.Parent = game.Workspace.Hungered
+			cue2.Name = "Spawn"
+			cue2.SoundId = "rbxassetid://9125712561"
+			cue2.Volume = 3
+			cue2.PlaybackSpeed = 1
+			cue2:Play()
+			local cue2 = Instance.new("Sound")
+			cue2.Parent = game.Workspace.Hungered
+			cue2.Name = "Spawn"
+			cue2.SoundId = "rbxassetid://9114038247"
+			cue2.Volume = 2
+			cue2.PlaybackSpeed = 1
+			cue2:Play()
+			local redtweeninfo = TweenInfo.new(8)
+			local redinfo = {Color = Color3.new(100, 0, 0)}
+			----------
+			for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+				if v:IsA("Light") then
+					game.TweenService:Create(v,redtweeninfo,redinfo):Play()
+					if v.Parent.Name == "LightFixture" then
+						game.TweenService:Create(v.Parent,redtweeninfo,redinfo):Play()
+					end
+				end
+			end
+
+			-- Camera shake
+			local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+			local camera = game.Workspace.CurrentCamera
+			local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(shakeCf)
+				camera.CFrame = camera.CFrame * shakeCf
+			end)
+
+			camShake:Start()
+			camShake:ShakeOnce(10, 3, 0.1, 6, 2, 0.5)
+
+		end)
+
+		entity:SetCallback("OnDespawning", function()
+			game.Workspace.Hungered:Destroy()
+			SmileColor:Destroy()
+
+			local redtweeninfo = TweenInfo.new(1)
+			local redinfo = {Color = Color3.new(255, 255, 255)}
+			----------
+			for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+				if v:IsA("Light") then
+					game.TweenService:Create(v,redtweeninfo,redinfo):Play()
+					if v.Parent.Name == "LightFixture" then
+						game.TweenService:Create(v.Parent,redtweeninfo,redinfo):Play()
+					end
+				end
+			end
+
+			if game:GetService("ReplicatedStorage"):FindFirstChild("Hunger") then
+				return
+			end
+
+			local Test = Instance.new("Part")
+			Test.Name = "Hunger"
+			Test.Parent = game:GetService("ReplicatedStorage")
+
+			---====== Load achievement giver ======---
+			local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+
+			---====== Display achievement ======---
+			achievementGiver({
+				Title = "Scream in Pain",
+				Desc = "I need Food",
+				Reason = "Encounter Hungered",
+				Image = "rbxassetid://97793014212677"
+			})
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth)
+			if newHealth == 0 then
+				print("Entity has killed the player")
+			else
+				game.Workspace.Hungered:Destroy()
+				game.Players.LocalPlayer.Character.Humanoid:TakeDamage(1000)
+				game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Hungered"
+
+				local shadow = game:GetObjects("rbxassetid://11503625408")[1]
+				local gui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui)
+				local cue = Instance.new("Sound")
+				cue.Parent = gui
+				cue.Name = "Spawn"
+				cue.SoundId = "rbxassetid://18459521002"
+				cue.Volume = 1
+				cue.PlaybackSpeed = 0.9
+				cue:Play()
+				shadow.Parent = gui
+				shadow.Visible = true
+				local l__ImageLabel__1 = shadow.ImageLabel;
+				local v2 = Random.new();
+				local l__SizeValue__3 = shadow.SizeValue;
+				local v4 = math.random(1, 6);
+				if v4 == 1 then
+					l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+				end;
+				if v4 == 2 then
+					l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+				end;
+				if v4 == 3 then
+					l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+				end;
+				if v4 == 4 then
+					l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+				end;
+				if v4 == 5 then
+					l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+				end;
+				if v4 == 6 then
+					l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+				end;
+				shadow.Jumpscare:Play();
+				for v5 = 1, 25 do
+					local v6 = math.random(1, 3);
+					if v6 == 1 then
+						shadow.BackgroundColor3 = Color3.new(255, 0, 0);
+						l__ImageLabel__1.ImageColor3 = Color3.new(1, 1, 1);
+					end;
+					if v6 == 2 then
+						shadow.BackgroundColor3 = Color3.new(0, 0, 0);
+						l__ImageLabel__1.ImageColor3 = Color3.new(1, 0, 0);
+					end;
+					if v6 == 3 then
+						shadow.BackgroundColor3 = Color3.new(0, 0, 0);
+						l__ImageLabel__1.ImageColor3 = Color3.new(1, 1, 1);
+					end;
+					l__ImageLabel__1.Position = UDim2.new(v2:NextNumber(0.4, 0.6), 0, v2:NextNumber(0.45, 0.55), 0);
+					l__ImageLabel__1.Size = l__ImageLabel__1.Size + UDim2.new(l__SizeValue__3.Value, 0, l__SizeValue__3.Value, 0);
+					l__ImageLabel__1.Rotation = math.random(-50, 20);
+					l__SizeValue__3.Value = l__SizeValue__3.Value - 0.01;
+					wait(0);
+				end;
+				l__ImageLabel__1.ImageColor3 = Color3.new(0, 0, 0);
+				shadow.BackgroundColor3 = Color3.new(1, 1, 1);
+				game.TweenService:Create(shadow, TweenInfo.new(1), {BackgroundTransparency = 1}):Play()
+				game.TweenService:Create(l__ImageLabel__1, TweenInfo.new(1), {ImageTransparency = 1}):Play()
+				wait(1)
+				gui:Destroy()
+			end
+		end)
+
+		---====== Run entity ======---
+
+		if not game.Workspace:FindFirstChild("SeekMovingNewClone") or 
+			latestRoom == 50 or latestRoom == 100 or 
+			(latestRoom >= 47 and latestRoom <= 51) or
+			(latestRoom >= 90 and latestRoom <= 100) or
+			(latestRoom >= 990 and latestRoom <= 1000) then
+			entity:Run()
+		end
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn chaser",
+	Callback = function()
+
+		local Speed = 18
+
+		local Players = game:GetService("Players")
+		local RunService = game:GetService("RunService")
+		local Debris = game:GetService("Debris")
+		local UserInputService = game:GetService("UserInputService")
+
+		local Player = Players.LocalPlayer
+		local Character = Player.Character or Player.CharacterAdded:Wait()
+		local Dummy = game:GetObjects("rbxassetid://96223289630255")[1]
+		local s = game:GetObjects("rbxassetid://95686572728139")[1]
+
+		s:FindFirstChildWhichIsA("BasePart").CanCollide = false
+		s:FindFirstChildWhichIsA("BasePart").Anchored = true
+
+		Dummy.Parent = workspace
+		s.Parent = workspace
+
+		Dummy.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame + Vector3.new(math.random(-20, 20), 0, math.random(-20, 20))
+		wait(1)
+		local function followPlayer()
+			local Direction = (Character.HumanoidRootPart.Position - Dummy.HumanoidRootPart.Position).unit
+			Dummy.HumanoidRootPart.Velocity = Direction * Speed
+			Dummy.HumanoidRootPart.CFrame = CFrame.new(Dummy.HumanoidRootPart.Position, Character.HumanoidRootPart.Position)
+		end
+
+		RunService.RenderStepped:Connect(function()
+			if s:IsDescendantOf(workspace) and Dummy:IsDescendantOf(workspace) and Dummy:FindFirstChild("HumanoidRootPart") and Dummy:FindFirstChild("Humanoid").Health > 0 then
+				local Distance = (Character.HumanoidRootPart.Position - Dummy.HumanoidRootPart.Position).magnitude
+
+				if Distance <= math.huge then
+					followPlayer()
+				end
+
+				s:PivotTo(Dummy.HumanoidRootPart.CFrame * CFrame.new(0,-3,0))
+			end
+		end)
+
+		local primary_part = s:FindFirstChildWhichIsA("BasePart") or s:FindFirstChildWhichIsA("Part")
+		entity = primary_part
+
+		task.spawn(function()
+			while true do wait(3)
+
+				local tweenservice = game:GetService("TweenService")
+				local light = entity.Face.PointLight
+				local radio = entity:WaitForChild("Radio Static Sound")
+				tweenservice:Create(light,TweenInfo.new(3,Enum.EasingStyle.Linear),{Range = math.random(10, 25)}):Play()
+				tweenservice:Create(light,TweenInfo.new(3,Enum.EasingStyle.Linear),{Brightness = math.random(5, 50)}):Play()
+
+				tweenservice:Create(radio,TweenInfo.new(3,Enum.EasingStyle.Linear),{Volume = 2}):Play()
+				tweenservice:Create(radio,TweenInfo.new(3,Enum.EasingStyle.Linear),{PlaybackSpeed = math.random(1, 5)}):Play()
+
+				for _,v in pairs(Dummy:GetDescendants()) do
+					if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+						v.CanCollide = false
+					end
+				end
+
+			end
+		end)
+
+		local player = game.Players.LocalPlayer
+		local character = player.Character or player.CharacterAdded:Wait()
+		local HumanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+		local death = true
+
+		spawn(function()
+			while task.wait() do
+				if death == true then
+
+					local monster = entity
+					local target = HumanoidRootPart
+					local origin = Dummy.HumanoidRootPart.Position
+					local direction = (target.Position - origin).Unit
+					local ray = Ray.new(origin, direction * 5)
+					local raycast = workspace:Raycast(ray.Origin, ray.Direction)
+
+					if raycast and raycast.Instance.Parent == character then
+						if not character:GetAttribute("Hiding") then
+
+							game.Players.LocalPlayer.Character.Humanoid:TakeDamage(1000)
+							game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Chaser"
+
+						end
+					end
+
+				end
+			end
+		end)
+
+		wait(30)
+		death = false
+		s:Destroy()
+		Dummy:Destroy()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn daze",
+	Callback = function()
+		local plr = game.Players.LocalPlayer
+		local chr = plr.Character or plr.CharacterAdded:Wait()
+		local cam = workspace.CurrentCamera
+		local offsetgyat = 7
+		local TweenService = game:GetService("TweenService")
+
+		local Daze = game:GetObjects("rbxassetid://14123016442")[1]
+		Daze.Parent = workspace
+		local primary_part = Daze:FindFirstChildWhichIsA("BasePart") or Daze:FindFirstChildWhichIsA("Part")
+		entity = primary_part
+		entity.CFrame = chr.HumanoidRootPart.CFrame * CFrame.new(0, 0, -offsetgyat)
+		entity.CanCollide = false
+		local att = entity.Attachment.face
+		att.Rate = 100
+		att.Speed = NumberRange.new(10, 15)
+		att.RotSpeed = NumberRange.new(-180, 180)
+		att.Texture = "rbxassetid://115068922160874"
+
+		local horrorScream = entity:WaitForChild("jumpscare")
+		local sound = entity:WaitForChild("PlaySound")
+		horrorScream.Volume = 2
+		horrorScream.Parent = Daze
+		horrorScream.Volume = 5
+
+		local lookDuration = 8
+		local startTime = tick()
+		local look = true
+
+		local function Dmg()
+			local hum = chr:FindFirstChild("Humanoid")
+			local dmg = math.random(5, 10)
+			hum:TakeDamage(dmg)
+			if hum.Health <= 0 then
+
+				local ReSt = game:GetService("ReplicatedStorage") 
+				ReSt.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Daze"
+			end
+		end
+
+		local function LookAt()
+			local direction = (entity.Position - cam.CFrame.Position).unit
+			local dot_product = direction:Dot(cam.CFrame.LookVector)
+			return dot_product > 0.8
+		end
+
+		local function Moving(target, dur)
+			local tween_info = TweenInfo.new(dur, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+			local tween = TweenService:Create(entity, tween_info, {CFrame = target})
+			tween:Play()
+			tween.Completed:Wait()
+		end
+
+		task.spawn(function()
+			while look do wait(0)
+
+				if LookAt() then
+					if tick() - startTime >= lookDuration then
+						Dmg()
+						look = false
+						horrorScream:Play()
+						Moving(chr.HumanoidRootPart.CFrame, 0.4)
+						game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Daze"
+						Moving(entity.CFrame * CFrame.new(0,-100,0), 5)
+						Daze:Destroy()
+					end
+
+				elseif not LookAt() then
+					if tick() - startTime >= lookDuration then
+						look = false
+						Moving(entity.CFrame * CFrame.new(0,-100,0), 5)
+						Daze:Destroy()
+
+						if not game:GetService("ReplicatedStorage"):FindFirstChild("Daze") then
+							local Test = Instance.new("Part")
+							Test.Name = "Daze"
+							Test.Parent = game:GetService("ReplicatedStorage")
+							local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+							achievementGiver({
+								Title = "Stay Tuned",
+								Desc = "Wake up!",
+								Reason = "Encounter Daze.",
+								Image = "rbxassetid://72305274740842"
+							})
+							return
+						end
+
+					end
+
+				end
+			end
+		end)
+
+		task.spawn(function()
+			while true do wait(0)
+				if Daze.PlaySound then
+					Daze.PlaySound.Volume = 0
+					Daze.PlaySound:Destroy()
+				end
+			end
+		end)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Common Sense [ONLY WORKING IN THE HOTEL-]",
+	Callback = function()
+		game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
+			if game:GetService("ReplicatedStorage").GameData.Floor.Value == "Hotel" then
+				if game.ReplicatedStorage.GameData.LatestRoom.Value == 50 then
+
+					---====== Load spawner ======---
+
+					local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+					---====== Create entity ======---
+
+					local entity = spawner.Create({
+						Entity = {
+							Name = "CommonSense",
+							Asset = "https://github.com/PABMAXICHAC/doors-monsters-models/raw/main/Common_Sense2.rbxm",
+							HeightOffset = 3
+						},
+						Lights = {
+							Flicker = {
+								Enabled = true,
+								Duration = 5
+							},
+							Shatter = false,
+							Repair = false
+						},
+						Earthquake = {
+							Enabled = false
+						},
+						CameraShake = {
+							Enabled = false,
+							Range = 100,
+							Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+						},
+						Movement = {
+							Speed = 45,
+							Delay = 5,
+							Reversed = true
+						},
+						Rebounding = {
+							Enabled = true,
+							Type = "Ambush", -- "Blitz"
+							Min = 100,
+							Max = 100,
+							Delay = 0.001
+						},
+						Damage = {
+							Enabled = true,
+							Range = 20,
+							Amount = 0.01
+						},
+						Crucifixion = {
+							Enabled = true,
+							Range = 40,
+							Resist = false,
+							Break = true
+						},
+						Death = {
+							Type = "Guiding", -- "Curious"
+							Hints = {"Death", "Hints", "Go", "Here"},
+							Cause = ""
+						}
+					})
+
+					---====== Debug entity ======---
+
+					entity:SetCallback("OnSpawned", function()
+						print("Entity has spawned")
+						game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+						game.Workspace.CommonSense:Destroy()
+					end)
+
+					entity:SetCallback("OnDamagePlayer", function(newHealth)
+						if newHealth == 0 then
+							print("Entity has killed the player")
+						else
+							print("Entity has damaged the player")
+							game.Players.LocalPlayer.Character.Humanoid:TakeDamage(1000)
+							game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Common Sense"
+						end
+					end)
+
+					---====== Run entity ======---
+
+					entity:Run()
+
+				end
+			end
+		end)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Trun",
+	Callback = function()
+		--- Rooms/CurrentRooms
+
+		local rooms = workspace.CurrentRooms
+
+		local currentRoom =  rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value + 1)
+
+		game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
+
+			currentRoom =  rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value + 1)
+
+		end)
+
+
+
+		local main = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value)
+
+		local no = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 1)
+
+		local go = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 2)
+
+		local en = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 3)
+
+		local ben = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 4)
+
+		cen = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 5)
+
+
+
+		game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
+
+			main = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value)
+
+			no = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 1)
+
+			go = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 2)
+
+			en = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 3)
+
+			ben = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 4)
+
+			cen = rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 5)
+
+
+
+		end)
+
+
+
+		if rooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value - 5) then
+
+			local s = game:GetObjects("rbxassetid://105778921849567")[1] --- Variable for the model
+
+			s.Parent = game.Workspace
+
+			local entity = s:FindFirstChildWhichIsA("BasePart") or s:FindFirstChildWhichIsA("Part")
+
+
+
+			coroutine.wrap(function()
+
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("D",true)
+
+				wait(0.5)
+
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("Do",true)
+
+				wait(0.5)
+
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("Don",true)
+
+				wait(0.4)
+
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("Dont",true)
+
+				wait(0.6)
+
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(" Dont Move",true)
+
+			end)()
+
+			local RunService = game:GetService("RunService")
+
+			local workspace = game:GetService("Workspace")
+
+			local silene = s
+
+			local hitboox = 50
+
+
+
+			if not silene.PrimaryPart then
+
+				silene.PrimaryPart = silene:FindFirstChildWhichIsA("BasePart")
+
+			end
+
+
+
+			RunService.Heartbeat:Connect(function()
+
+				for _, plaer in pairs(game.Players:GetPlayers()) do
+
+					if plaer.Character and plaer.Character:FindFirstChild("HumanoidRootPart") and plaer.Character:FindFirstChild("Humanoid") then
+
+						local rane = (silene.PrimaryPart.Position - plaer.Character.HumanoidRootPart.Position).Magnitude
+
+						if rane <= hitboox then
+
+							local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+
+							local camera = game.Workspace.CurrentCamera
+
+							local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(shakeCf)
+
+								camera.CFrame = camera.CFrame * shakeCf
+
+							end)
+
+
+
+							camShake:Start()
+
+							camShake:ShakeOnce(5, 6, 0.1, 2, 1, 6)
+
+						end
+
+					end
+
+				end
+
+			end)
+
+
+
+			wait(2.5)
+
+
+
+			local death = true
+
+			local can = game.Players.LocalPlayer.Character.Humanoid.Running:Connect(function()
+
+				if death == true then
+
+					local ray = game.Workspace:Raycast(entity.Position,game.Players.LocalPlayer.Character.HumanoidRootPart.Position - entity.Position)
+
+					if ray.Instance.Parent == game.Players.LocalPlayer.Character or ray.Instance.Parent.Parent == game.Players.LocalPlayer.Character then
+
+
+
+						local shadow = game:GetObjects("rbxassetid://11503625408")[1]
+
+						local gui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui)
+
+						shadow.Parent = gui
+
+						shadow.Visible = true
+
+
+
+						local sound = Instance.new("Sound")
+
+						sound.SoundId = "rbxassetid://314678645" 
+
+						sound.Parent = gui
+
+						sound.Volume = 0.5
+
+						sound:Play()
+
+
+
+						local l__ImageLabel__1 = shadow.ImageLabel;
+
+						local v2 = Random.new();
+
+						local l__SizeValue__3 = shadow.SizeValue;
+
+						local v4 = math.random(1, 6);
+
+						if v4 == 1 then
+
+							l__ImageLabel__1.Image = "rbxassetid://121310262753789";
+
+						end;
+
+						if v4 == 2 then
+
+							l__ImageLabel__1.Image = "rbxassetid://121310262753789";
+
+						end;
+
+						if v4 == 3 then
+
+							l__ImageLabel__1.Image = "rbxassetid://121310262753789";
+
+						end;
+
+						if v4 == 4 then
+
+							l__ImageLabel__1.Image = "rbxassetid://121310262753789";
+
+						end;
+
+						if v4 == 5 then
+
+							l__ImageLabel__1.Image = "rbxassetid://121310262753789";
+
+						end;
+
+						if v4 == 6 then
+
+							l__ImageLabel__1.Image = "rbxassetid://121310262753789";
+
+						end;
+
+						shadow.Jumpscare:Play();
+
+						for v5 = 1, 25 do
+
+							local v6 = math.random(1, 3);
+
+							if v6 == 1 then
+
+								shadow.BackgroundColor3 = Color3.new(1, 0, 0);
+
+								l__ImageLabel__1.ImageColor3 = Color3.new(0, 0, 0);
+
+							end;
+
+							if v6 == 2 then
+
+								shadow.BackgroundColor3 = Color3.new(0, 0, 0);
+
+								l__ImageLabel__1.ImageColor3 = Color3.new(1, 1, 1);
+
+							end;
+
+							if v6 == 3 then
+
+								shadow.BackgroundColor3 = Color3.new(0, 0, 1);
+
+								l__ImageLabel__1.ImageColor3 = Color3.new(0, 0, 0);
+
+							end;
+
+							l__ImageLabel__1.Position = UDim2.new(v2:NextNumber(0.4, 0.6), 0, v2:NextNumber(0.45, 0.55), 0);
+
+							l__ImageLabel__1.Size = l__ImageLabel__1.Size + UDim2.new(l__SizeValue__3.Value, 0, l__SizeValue__3.Value, 0);
+
+							l__ImageLabel__1.Rotation = math.random(-50, 50);
+
+							l__SizeValue__3.Value = l__SizeValue__3.Value - 0.01;
+
+							wait(0.065);
+
+						end;
+
+						l__ImageLabel__1.ImageColor3 = Color3.new(1, 1, 1);
+
+						shadow.BackgroundColor3 = Color3.new(0, 0, 0);
+
+						gui:Destroy()
+
+						game.Players.LocalPlayer.Character.Humanoid:TakeDamage(1000)
+
+						game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Trun"
+
+
+
+					end
+
+				end
+
+			end)
+
+
+
+			entity.CFrame = cen.RoomExit.CFrame * CFrame.new(0, 3, -100)
+
+
+
+			local TweenService = game:GetService("TweenService")
+
+			local function Moving(target, dur)
+
+				local tween_info = TweenInfo.new(dur, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+				local tween = TweenService:Create(entity, tween_info, {CFrame = target})
+
+				tween:Play()
+
+				tween.Completed:Wait()
+
+			end
+
+
+
+			Moving(ben.RoomExit.CFrame, 1)
+
+			wait(0)
+
+			Moving(en.Parts.Floor.CFrame, 1)
+
+			wait(1)
+
+			Moving(en.RoomExit.CFrame, 1)
+
+			wait(1)
+
+			Moving(go.Parts.Floor.CFrame, 1)
+
+			wait(1)
+
+			Moving(go.RoomExit.CFrame, 1)
+
+			wait(1)
+			Moving(no.Parts.Floor.CFrame, 1)
+
+			wait(1)
+
+			Moving(no.RoomExit.CFrame, 1.5)
+
+			wait(1)
+
+			Moving(main.Parts.Floor.CFrame, 0.5)
+
+			wait(1)
+
+			Moving(main.RoomExit.CFrame, 2)
+
+			wait(0)
+
+			death = false
+
+			local fallframe = entity.CFrame * CFrame.new(0, -100, 0)
+
+			Moving(fallframe, 3)
+
+			wait(1.5)
+
+			s:Destroy()
+
+		end
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Spawn Bite [Using for backdoor or anywhere you want]",
+	Callback = function()
+		---====== Load spawner ======---
+
+		local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/DOORS-Entity-Spawner-V2/main/init.luau"))()
+
+		---====== Create entity ======---
+
+		local entity = Spawner:Create({
+			Entity = {
+				Name = "Bite",
+				Asset = "https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/BiteMoving.rbxm",
+				HeightOffset = 0
+			},
+			Lights = {
+				Flicker = {
+					Enabled = true,
+					Duration = 2
+				},
+				Shatter = false,
+				Repair = false
+			},
+			Earthquake = {
+				Enabled = false
+			},
+			CameraShake = {
+				Enabled = true,
+				Range = 100,
+				Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+			},
+			Movement = {
+				Speed = 200,
+				Delay = 2,
+				Reversed = false
+			},
+			Rebounding = {
+				Enabled = true,
+				Type = "Ambush", -- "Blitz"
+				Min = 1,
+				Max = 5,
+				Delay = 2
+			},
+			Damage = {
+				Enabled = true,
+				IgnoreHiding = false,
+				Range = 40,
+				Amount = 125
+			},
+			Crucifixion = {
+				Type = "Guiding",
+				Enabled = false,
+				Range = 40,
+				Resist = false,
+				Break = false
+			},
+			Death = {
+				Type = "Curious", -- "Curious"
+				Hints = {"Dead again huh?", "Lest see what you got this time?", "What the?", "That thing?", "I never seen that before didn't i?", "It's seem blitz cannot control anything.", "*Sign*", "..", "...That thing call bite..", "I think that he had funs with you until the time end.", "It take a while, It wont stop", "I'll see you soon."},
+				Cause = "Bite"
+			}
+		})
+
+		---====== Debug entity ======---
+
+		entity:SetCallback("OnSpawned", function()
+			print("Entity has spawned")
+			wait(1)
+			require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("H3ll0 Th3r3",true)
+			wait(1)
+			require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("Y0u Hav3n t  S33n m3 be  f  e   b  t  n  ow  u    d     d  R           3",true)
+			wait(1)
+			require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("1 G0N A  H0W Y 0  THA  Y0  R PANI K",true)
+			wait(1)
+			require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("T1ME W1LL E  D B  T 1 LL  EVER  TOP",true)
+			wait(1)
+			require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("C  USE 1  AVE S0 E  UCH  FUN   AY NG W TH Y0U",true)
+
+		end)
+
+		entity:SetCallback("OnStartMoving", function()
+			print("Entity has started moving")
+		end)
+
+		entity:SetCallback("OnEnterRoom", function(room: Model, firstTime: boolean)
+			if firstTime == true then
+				print("Entity has entered room: ".. room.Name.. " for the first time")
+			else
+				print("Entity has entered room: ".. room.Name.. " again")
+			end
+		end)
+
+		entity:SetCallback("OnLookAt", function(lineOfSight: boolean)
+			if lineOfSight == true then
+				print("Player is looking at entity")
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("1 S   3 Y     u",true)
+			end
+		end)
+
+		entity:SetCallback("OnRebounding", function(startOfRebound: boolean)
+			if startOfRebound == true then
+				print("Entity has started rebounding")
+				wait(1)
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("H  1    d   3",true)
+			end
+		end)
+
+		entity:SetCallback("OnDespawned", function()
+			print("Entity has despawned")
+			wait(1)
+			require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("-- .- -.-- -... . / -. . -..- - / - .. -- . / .-- . / -- . . - / - --- --. . - .... . .-. / .- --. .- .. -. / .. -. / - .... . / ..-. / ..- / - / ..- / .-. / . / ... --- -- . - .. -- .",true)
+		end)
+
+		entity:SetCallback("OnDamagePlayer", function(newHealth: number)
+			if newHealth <= 0 then
+				print("Entity has killed the player")
+				require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(".-.. . ... - / -.. --- / .. - / .- --. .- .. -. / ... --- -- . - .. -- . / .. -. / - .... . / ..-. ..- - ..- .-. / ... .... .- .-.. .-.. / .-- . . .-.-.-",true)
+			end
+		end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+		---====== Run entity ======---
+
+		entity:Run(true)
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "MORE COMING SOON....",
+	Callback = function()
+		--Put script here--
+	end,
+})
+----------End----------EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
