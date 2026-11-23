@@ -3,14 +3,14 @@ function GetRoom()
 	return gruh:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value)
 end
 
-local s = game:GetObjects("https://github.com/mahdpaki-ui/EntityModelCostume/raw/main/Portal.rbxm")[1]
+local s = game:GetObjects("rbxassetid://114164098126391")[1]
 s.Parent = workspace
 
 local entity = s:FindFirstChildWhichIsA("BasePart")
 entity.Parent = s
-entity.CFrame = GetRoom():WaitForChild("RoomEntrance").CFrame * CFrame.new(0,0,-15)
+entity.CFrame = GetRoom():WaitForChild("RoomEntrance").CFrame * CFrame.new(0,0,-50)
 entity.Playsound:Play()
-entity.Playsound.Volume = 9
+entity.Playsound.Volume = 2
 
 game.Workspace.CurrentRooms.ChildAdded:Connect(function()
 	s:Destroy()
@@ -27,8 +27,8 @@ task.spawn(function()
 		local hrp = char and char:FindFirstChild("HumanoidRootPart")
 
 		if hum and hrp and (hrp.Position - entity.Position).Magnitude <= 10 then
-			game.Players.LocalPlayer.Character.Humanoid.Health -= 999999999
-			game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Fluster"
+			game.Players.LocalPlayer.Character.Humanoid.Health -= 999
+			game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Portal"
 		end
 	end
 end)
