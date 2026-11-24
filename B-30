@@ -45,7 +45,7 @@ local entity = spawner.Create({
 		Reversed = false
 	},
 	Rebounding = {
-		Enabled = false
+		Enabled = false --It keep take his time dud bohoo
 	},
 	Damage = {
 		Enabled = true,
